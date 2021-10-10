@@ -1,0 +1,13 @@
+body {
+    background-image: url(https://wallpapercave.com/wp/cqhO8rQ.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+}
+div {
+  text-align: start;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: black;
+}
