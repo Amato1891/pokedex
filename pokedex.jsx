@@ -43,18 +43,25 @@ const useDataApi = (initialUrl, initialData) => {
 let sliced = data.moves.slice(0,5);
       //Styling the grid
 const myStyle = {
-    border: '1px solid black'
+    border: '1px solid black',
+    justifyContent: 'center',
+    position:'relative'
+}
+const inputStyle = {
+  left: '5%',
+  position: 'relative'
 }
 const sprite = {
-    backgroundImage: `url(${data.sprites.front_default})`,
+    backgroundImage: `url(${data.sprites.front_default}), url(https://external-preview.redd.it/e5zoQw-hgw-LCjdhC_4G8IAcHxex5pzda_BD_FPTcBY.png?auto=webp&s=c0b96b5ec20010a15864b8a0c9b202c119e52fe8)`,
+    position:'relative',
     backgroundRepeat: 'no-repeat',
     backgroundSize:'contain',
-    border: '1px solid black',
-    height:'250px'
+    height:'400px',
     };
       //search bar for pokemon
     return (
       <Fragment>
+        <div style= {inputStyle}>
           <h2>{data.name} ID.{data.id}</h2>
         <form
           onSubmit={(event) => {
@@ -67,10 +74,11 @@ const sprite = {
           placeholder='Pokemon name or id'
             type="text"
             value={query}
-            onChange={(event) => setQuery(event.target.value)}
+            onChange={(event) => setQuery(event.target.value.toLowerCase())}
           />
           <button type="submit">Search</button>
         </form>
+        </div>
       {/* error handling */}
         {isError && <div style={{color:'red'}}>Invalid name or pokemon id ...</div>}
   
@@ -78,18 +86,19 @@ const sprite = {
           <div>Loading ...</div>
         ) : (
       // the grid where data from the api is rendered
-            <div className="container" style={myStyle}>
-  <div className="row justify-content-md-center">
-    <div className="col col-lg-2" style={myStyle}> 
+            <div className="container">
+  <div className="row-sm-auto">
+    
+    <div className="col col-sm-auto" style={myStyle}> 
     {`Base experience: ${data.base_experience}`}
    
     </div>
-    <div className="col-md-auto" style={myStyle}>
+    <div className="col-sm-auto" style={myStyle}>
    
     {`Weight: ${data.weight}`}
 
     </div>
-    <div className="col col-lg-2" style={myStyle}>
+    <div className="col col-sm-auto" style={myStyle}>
     Types:
         <ul>
           {data.types.map((item) => (
@@ -101,8 +110,8 @@ const sprite = {
 
     </div>
   </div>
-  <div className="row" >
-    <div className="col"  style={myStyle}>
+  <div className="row-sm-auto" >
+    <div className="col-sm-auto"  style={myStyle}>
     Abilites:
         <ul>
           {data.abilities.map((item) => (
@@ -112,7 +121,7 @@ const sprite = {
           ))}
         </ul>
     </div>
-    <div className="col-md-auto" style={myStyle}>
+    <div className="col col-lg-auto" style={myStyle}>
     Moves:
         <ul>
           {sliced.map((item, index) => (
@@ -122,10 +131,11 @@ const sprite = {
           ))}
         </ul>  
     </div>
-    <div className="col col-lg-2" style={sprite}>
+    <div className="row-md-1" style={sprite}>
     </div>
   </div>
 </div>
+
         )}
       </Fragment>
     );
